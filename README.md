@@ -40,4 +40,20 @@ Incluye un **dashboard personalizado** para cada usuario, donde puede administra
 ---
 
 ## 📂 Estructura del proyecto
-
+TIENDA_TENDER_JS/
+│
+├── backend/
+│ ├── models/
+│ │ └── User.js # Modelo de datos del usuario
+│ └── server.js # Servidor Node.js y configuración de rutas
+│
+├── images/ # Imágenes del catálogo y recursos gráficos
+│
+├── node_modules/ # Dependencias instaladas por npm
+│
+├── .env # Variables de entorno (configuración)
+├── index.html # Página principal del frontend
+├── package.json # Configuración del proyecto y dependencias
+├── package-lock.json # Bloqueo de versiones de dependencias
+├── script.js # Lógica de interacción del frontend
+└── styles.css # Estilos de la interfaz
