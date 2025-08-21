@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración de Usuarios</title>
+    <link rel="stylesheet" href="/styles/dashboard.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<main class="main-content">
+    <section class="admin-section">
+        <div class="dashboard-container">
+            <h1><i class="fas fa-users-cog"></i> Administración de Usuarios</h1>
+
+            <div class="controls-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar usuarios...">
+                </div>
+                <button id="addUserBtn">
+                    <i class="fas fa-user-plus"></i> Añadir Usuario
+                </button>
+            </div>
+            <!-- Tabla de Usuarios -->
+            <div class="table-container">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-id-badge"></i> ID</th>
+                            <th><i class="fas fa-user"></i> Nombre</th>
+                            <th><i class="fas fa-envelope"></i> Email</th>
+                            <th><i class="fas fa-user-shield"></i> Rol</th>
+                            <th><i class="fas fa-cogs"></i> Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td>Juan Pérez</td>
+                            <td>juan.perez@example.com</td>
+                            <td>Administrador</td>
+                            <td>   
+                                <button class="actions-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="actions-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>María López</td>
+                            <td>maria.lopez@example.com</td>
+                            <td>Usuario</td>
+                            <td>
+                                <button class="actions-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="actions-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <section>
+        <div class="modal" id="userModal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeModalBtn"><i class="fas fa-times"></i></span>
+                <h2 id="modalTitle"><i class="fas fa-user-edit"></i> Añadir Usuario</h2>
+                <form id="userForm">
+                    <input type="hidden" id="userId">
+
+                    <label for="userName"><i class="fas fa-user"></i> Nombre:</label>
+                    <input type="text" id="userName" required>
+
+                    <label for="userEmail"><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="userEmail" required>
+
+                    <label for="userRole"><i class="fas fa-user-tag"></i> Rol:</label>
+                    <select id="userRole">
+                        <option value="admin">Administrador</option>
+                        <option value="user">Usuario</option>
+                    </select>
+
+                    <button type="submit" id="saveUserBtn">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/scripts/dashboard.js"></script>
+</body>
+</html>

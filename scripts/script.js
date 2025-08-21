@@ -1,15 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Product data
+    // datos de productos
     const products = [
         { id: 1, name: 'Smartwatch Ultrafino', price: 199.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/smartwatch-1869678_1280.jpg', description: 'Un reloj inteligente con todas las funciones que necesitas.' },
         { id: 2, name: 'Audífonos Bluetooth', price: 89.99, image: 'https://cdn.pixabay.com/photo/2017/04/06/11/04/audio-2207038_1280.jpg', description: 'Sonido de alta calidad y batería de larga duración.' },
         { id: 3, name: 'Cámara Réflex Profesional', price: 1200.00, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/camera-1869634_1280.jpg', description: 'Captura momentos inolvidables con la mejor calidad.' },
         { id: 4, name: 'Laptop Ultraligera', price: 950.50, image: 'https://cdn.pixabay.com/photo/2016/09/25/11/50/notebook-1694602_1280.jpg', description: 'Rendimiento y portabilidad en un solo dispositivo.' },
         { id: 5, name: 'Teléfono Móvil Gama Alta', price: 799.00, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/phone-1869584_1280.jpg', description: 'El último modelo con cámara de 108MP.' },
-        { id: 6, name: 'Tablet con Stylus', price: 450.00, image: 'https://cdn.pixabay.com/photo/2016/09/25/11/50/tablet-1694600_1280.jpg', description: 'Perfecta para dibujar, tomar notas y ver series.' }
+        { id: 6, name: 'Tablet con Stylus', price: 450.00, image: 'https://cdn.pixabay.com/photo/2016/09/25/11/50/tablet-1694600_1280.jpg', description: 'Perfecta para dibujar, tomar notas y ver series.' },
+        {id: 7, name: 'Monitor 4K Ultra HD', price: 299.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/monitor-1869640_1280.jpg', description: 'Disfruta de tus juegos y películas con la mejor resolución.'},
+        {id: 8, name: 'Teclado Mecánico RGB', price: 129.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/keyboard-1869641_1280.jpg', description: 'Teclas personalizables y retroiluminación RGB.'},
+        {id: 9, name: 'Ratón Gaming Inalámbrico', price: 79.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/mouse-1869642_1280.jpg', description: 'Precisión y comodidad para largas sesiones de juego.'},
+        {id: 10, name: 'Base de Carga Inalámbrica', price: 49.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/wireless-charger-1869643_1280.jpg', description: 'Carga tu dispositivo sin cables.'},
+        {id: 11, name: 'Proyector Portátil', price: 399.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/projector-1869644_1280.jpg', description: 'Lleva el cine a donde quieras con este proyector compacto.'},
+        {id: 12, name: 'Altavoces Bluetooth Portátiles', price: 69.99, image: 'https://cdn.pixabay.com/photo/2016/11/29/09/56/speaker-1869645_1280.jpg', description: 'Sonido envolvente y fácil de transportar.'}
     ];
 
-    // DOM references
+    // DOM referencias
     const menuLinks = document.querySelectorAll('.menu ul li a');
     const productCatalog = document.getElementById('product-catalog');
     const userDashboard = document.getElementById('user-dashboard');
@@ -17,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const shoppingCartSidebar = document.getElementById('shopping-cart-sidebar');
     const mainHeaderTitle = document.getElementById('main-header-title');
 
-    // Authentication and Cart
+    // Autenticación y Carrito
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) || null;
     let users = JSON.parse(localStorage.getItem('users')) || [
@@ -27,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('users', JSON.stringify(users));
     }
 
-    // --- Rendering Functions ---
+    // --- funcion para renderizar los productos ---
     function renderProducts() {
         productCatalog.innerHTML = '';
         products.forEach(product => {
@@ -45,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productCatalog.appendChild(card);
         });
     }
-
+    //--- funcion para renderizar el carrito ---
     function renderCart() {
         const cartItemsList = document.getElementById('cart-items');
         const cartItemsListFull = document.getElementById('cart-items-full');
@@ -82,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCheckoutButtonState();
     }
 
-    // --- Navigation and Main Logic ---
+    // --- navegacion logica ---
     function handleMenuClick(viewId) {
         menuLinks.forEach(link => link.classList.remove('active'));
         document.querySelector(`[href="#${viewId}"]`).classList.add('active');
@@ -115,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Cart Functions ---
+    // --- funcion agregar al carrito ---
     function addToCart(productId) {
         const product = products.find(p => p.id == productId);
         if (product) {
@@ -129,11 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- funcion eliminar del carrito ---
     function removeFromCart(productId) {
         cart = cart.filter(item => item.id != productId);
         renderCart();
     }
 
+    // --- funcion actualizar estado del boton de pago ---
     function updateCheckoutButtonState() {
         const termsCheckboxSidebar = document.getElementById('terms-checkbox');
         const termsCheckboxFull = document.getElementById('terms-checkbox-full');
@@ -147,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkoutBtnSidebar) checkoutBtnSidebar.disabled = !(loggedIn && termsChecked && cartNotEmpty);
         if (checkoutBtnFull) checkoutBtnFull.disabled = !(loggedIn && termsChecked && cartNotEmpty);
     }
-    
-    // --- Authentication Functions ---
+
+    // --- Autenticación ---
     function checkLoginStatus() {
         const loginItem = document.getElementById('loginItem');
         const logoutItem = document.getElementById('logoutItem');
@@ -162,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateCheckoutButtonState();
     }
-
+    //---funcion para iniciar sesion---
     function loginUser(email, password) {
         const user = users.find(u => u.email === email && u.password === password);
         if (user) {
@@ -176,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Credenciales incorrectas.');
         }
     }
-
+    //---funcion para cerrar sesion---
     function logoutUser() {
         loggedInUser = null;
         localStorage.removeItem('loggedInUser');
@@ -184,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkLoginStatus();
         handleMenuClick('inicio');
     }
-
+    //---funcion para renderizar el panel de usuario---
     function renderUserDashboard() {
         if (loggedInUser) {
             document.getElementById('user-name').textContent = loggedInUser.name;
@@ -192,31 +200,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Event Listeners ---
+    //--- funcion para agregar productos al carrito ---
     productCatalog.addEventListener('click', (e) => {
         if (e.target.classList.contains('add-to-cart-btn')) {
             addToCart(e.target.dataset.id);
         }
     });
-
+    //--- funcion para eliminar del carrito ---
     shoppingCartSidebar.addEventListener('click', (e) => {
         if (e.target.closest('.remove-item-btn')) {
             removeFromCart(e.target.closest('.remove-item-btn').dataset.id);
         }
     });
-    
+    //--- funcion para eliminar del carrito ---
     shoppingCartView.addEventListener('click', (e) => {
         if (e.target.closest('.remove-item-btn')) {
             removeFromCart(e.target.closest('.remove-item-btn').dataset.id);
         }
     });
-
+    //--- funcion para procesar el pago ---
     document.getElementById('checkoutBtn').addEventListener('click', () => {
         alert('Redireccionando a PayPal para pagar...');
         cart = [];
         renderCart();
     });
-    
+    //--- funcion para procesar el pago ---
     document.getElementById('checkoutBtnFull').addEventListener('click', () => {
         alert('Redireccionando a PayPal para pagar...');
         cart = [];
@@ -256,19 +264,19 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         logoutUser();
     });
-
+    //--- funcion para mostrar el formulario de registro ---
     document.getElementById('showRegister').addEventListener('click', (e) => {
         e.preventDefault();
         document.getElementById('login-form').style.display = 'none';
         document.getElementById('register-form').style.display = 'block';
     });
-
+    //--- funcion para mostrar el formulario de inicio de sesion ---
     document.getElementById('showLogin').addEventListener('click', (e) => {
         e.preventDefault();
         document.getElementById('login-form').style.display = 'block';
         document.getElementById('register-form').style.display = 'none';
     });
-
+    //--- funcion para cerrar modal ---
     document.querySelectorAll('.close-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.getElementById('authModal').style.display = 'none';
@@ -281,14 +289,14 @@ document.addEventListener('DOMContentLoaded', () => {
             event.target.style.display = 'none';
         }
     };
-    
+    //--- funcion para iniciar sesion ---
     document.getElementById('loginForm').addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
         loginUser(email, password);
     });
-
+    //--- funcion para registrar usuarios ---
     document.getElementById('registerForm').addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('registerName').value;
@@ -307,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('register-form').style.display = 'none';
         }
     });
-
+    //--- funcion para mostrar terminos y condiciones ---
     document.getElementById('showTerms').addEventListener('click', (e) => {
         e.preventDefault();
         document.getElementById('termsModal').style.display = 'flex';
