@@ -31,7 +31,7 @@ Incluye un **dashboard personalizado** para cada usuario, donde puede administra
 ## 🛠️ Tecnologías utilizadas
 
 - **Frontend**: HTML5, CSS3, JavaScript (Bootstrap para el diseño responsivo).
-- ** Node.js *(dependiendo de implementación)*
+- ** Node.js 
 - **Base de datos**: MongoDB
 - **Control de versiones**: Git y GitHub
 - **Autenticación**: JWT / Firebase Auth *(dependiendo de implementación)*
